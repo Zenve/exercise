@@ -14,22 +14,19 @@ exports.assetsPath = function (_path) {
 
 exports.cssLoaders = function (options) {
   options = options || {}
-
   const cssLoader = {
     loader: 'css-loader',
     options: {
       sourceMap: options.sourceMap
     }
-  }
 
+  }
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
       sourceMap: options.sourceMap
     }
   }
-
-  // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
@@ -52,18 +49,27 @@ exports.cssLoaders = function (options) {
     } else {
       return ['vue-style-loader'].concat(loaders)
     }
-  }
 
-  // https://vue-loader.vuejs.org/en/configurations/extract-css.html
+  }
+  const stylusOptions = {
+    import: [
+      path.join(__dirname, "../src/common/stylus/index.styl"), // .styl全局变量文件
+    ],
+    paths: [
+      path.join(__dirname, "../src/common"),
+      path.join(__dirname, "../"),
+    ],
+  }
   return {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    stylus: generateLoaders('stylus',stylusOptions),
+    styl: generateLoaders('stylus',stylusOptions)
   }
+
 }
 
 // Generate loaders for standalone style files (outside of .vue)

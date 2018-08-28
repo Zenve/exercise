@@ -10,32 +10,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const express = require('express')
+
 var app = express()
-var appData = require('../static/data')
+var appData = require('../static/data.json')
 var seller = appData.seller
 var goods = appData.goods
 var ratings = appData.ratings
 var apiRoutes = express.Router()
-apiRoutes.get('/api/seller',function (req,res) {
-  res.json({
-    erro: 0,
-    data: seller
-  })
-})
-apiRoutes.get('/api/goods',function (req,res) {
-  res.json({
-    erro: 0,
-    data: goods
-  })
-})
-apiRoutes.get('/api/ratings',function (req,res) {
-  res.json({
-    erro: 0,
-    data: ratings
-  })
-})
 app.use('/api',apiRoutes)
-
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -50,7 +32,24 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   // these devServer options should be customized in /config/index.js
   devServer: {
     before(app){
-
+      app.get('/api/seller',(req,res) => {
+        res.json({
+          erro: 0,
+          data: seller
+        })
+      })
+      app.get('/api/goods',(req,res) => {
+        res.json({
+          erro: 0,
+          data: goods
+        })
+      })
+      app.get('/api/ratings',(req,res) => {
+        res.json({
+          erro: 0,
+          data: ratings
+        })
+      })
     },
     clientLogLevel: 'warning',
     historyApiFallback: {
