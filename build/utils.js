@@ -27,7 +27,8 @@ exports.cssLoaders = function (options) {
       sourceMap: options.sourceMap
     }
   }
-  function generateLoaders (loader, loaderOptions) {
+
+  function generateLoaders(loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
 
     if (loader) {
@@ -51,6 +52,7 @@ exports.cssLoaders = function (options) {
     }
 
   }
+
   const stylusOptions = {
     import: [
       path.join(__dirname, "../src/common/stylus/index.styl"), // .styl全局变量文件
@@ -64,10 +66,10 @@ exports.cssLoaders = function (options) {
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
+    sass: generateLoaders('sass', {indentedSyntax: true}),
     scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus',stylusOptions),
-    styl: generateLoaders('stylus',stylusOptions)
+    stylus: generateLoaders('stylus', stylusOptions),
+    styl: generateLoaders('stylus', stylusOptions)
   }
 
 }
