@@ -10,41 +10,41 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const express = require('express')
-
 var app = express()
-var appData = require('../static/data.json')
+var appData = require('../static/data')
 var seller = appData.seller
 var goods = appData.goods
 var ratings = appData.ratings
 var apiRoutes = express.Router()
-app.use('/api',apiRoutes)
+app.use('/api', apiRoutes)
+
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 
   // these devServer options should be customized in /config/index.js
   devServer: {
-    before(app){
-      app.get('/api/seller',(req,res) => {
+    before(app) {
+      app.get('/api/seller', function (req, res) {
         res.json({
           erro: 0,
           data: seller
         })
       })
-      app.get('/api/goods',(req,res) => {
+      app.get('/api/goods', function (req, res) {
         res.json({
           erro: 0,
           data: goods
         })
       })
-      app.get('/api/ratings',(req,res) => {
+      app.get('/api/ratings', function (req, res) {
         res.json({
           erro: 0,
           data: ratings
@@ -54,7 +54,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        {from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html')},
       ],
     },
     hot: true,
@@ -64,7 +64,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
-      ? { warnings: false, errors: true }
+      ? {warnings: false, errors: true}
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: config.dev.proxyTable,
@@ -114,8 +114,8 @@ module.exports = new Promise((resolve, reject) => {
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)

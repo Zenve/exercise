@@ -1,23 +1,62 @@
 <template>
-  <div id="app">
-    <!--<img src="./assets/logo.png">-->
-    <router-view/>
+  <div class="app">
+    <iheader :seller="seller"></iheader>
+    <div class="tab border-1px">
+      <router-link class="tab-item" to="goods">
+        商品
+      </router-link>
+      <router-link class="tab-item" to="ratings">
+        评论
+      </router-link>
+      <router-link class="tab-item" to="seller">
+        商家
+      </router-link>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import header from '@/components/header/header'
+  import goods from '@/components/goods/goods'
+  import ratings from '@/components/ratings/ratings'
+  import seller from '@/components/seller/seller'
+
+  export default {
+    name: 'App',
+    data() {
+      return {
+        seller: {}
+      }
+    },
+    created() {
+      this.axios.get('/api/seller').then((res) => {
+        // console.log(res)
+        if (res.status === 200) {
+          // console.log(res.data.data)
+          this.seller = res.data.data
+        }
+      })
+    },
+    components: {
+      'iheader': header,
+      'goods': goods,
+      'ratings': ratings,
+      'seller': seller
+    }
+  }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus">
+  .tab
+    color: #2c3e50
+    height: 40px
+    line-height: 40px
+    display: flex
+    justify-content: space-between
+    border-1px(red)
+    .tab-item
+      flex: 1
+      text-align: center
+
 </style>
