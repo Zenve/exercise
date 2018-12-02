@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <iheader :seller="seller"></iheader>
-    <div class="tab border-1px">
+    <div class="tab">
       <router-link class="tab-item" to="goods">
         商品
       </router-link>
@@ -12,7 +12,7 @@
         商家
       </router-link>
     </div>
-    <router-view></router-view>
+    <router-view :seller="seller"></router-view>
   </div>
 </template>
 
@@ -54,7 +54,7 @@
     line-height: 40px
     display: flex
     justify-content: space-between
-    border-1px(red)
+    border-1px(rgba(7,17,27,0.1))
     .tab-item
       flex: 1
       text-align: center

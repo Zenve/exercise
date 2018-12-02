@@ -2,7 +2,16 @@ html, body
   line-height: 1
   font-weight: 200
   font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif
-
+.router-link-active
+  position: relative
+  &::after
+    position: absolute
+    display: block
+    left: 0
+    bottom: 0
+    content: ' '
+    border-top: 1px solid red
+    width: 100%
 .clearfix
   display: inline-block
   &::after
