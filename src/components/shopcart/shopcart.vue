@@ -21,12 +21,28 @@
         </div>
       </div>
     </div>
+    <div class="ball-container">
+      <div v-for="(ball,index) in balls" :key="index" v-show="ball.show" transition="drop" class="ball">
+        <div class="inner"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'shopcart',
+    data() {
+      return {
+        balls: [
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false},
+          {show: false}
+        ]
+      }
+    },
     props: {
       selectFoods: {
         type: Array,
@@ -45,6 +61,7 @@
     },
     computed: {
       totalPrice() {
+        // console.log(this.selectFoods)
         let total = 0
         this.selectFoods.forEach((food) => {
           total += food.price * food.count
@@ -74,6 +91,11 @@
         } else {
           return 'enough'
         }
+      }
+    },
+    methods: {
+      drop(args) {
+        console.log(args)
       }
     }
   }
@@ -173,4 +195,21 @@
           &.enough
             background: #00b43c
             color: #fff
+    .ball-container
+      .ball
+        position: fixed
+        left: 32px
+        bottom: 22px
+        z-index: 200
+        &.drop-transition
+          transition: all 0.4s
+          .inner
+            width: 16px
+            height: 16px
+            -webkit-border-radius: 50%
+            -moz-border-radius: 50%
+            border-radius: 50%
+            background: rgb(0, 160, 220)
+            transition: all 0.4s
+
 </style>

@@ -32,6 +32,17 @@
     created() {
       this.axios.get('/api/seller').then((res) => {
         // console.log(res)
+        // let {
+        //   status: statu,
+        //   data: {
+        //     data: jsonData
+        //   }
+        // } = res
+        // console.log(statu)
+        // console.log(jsonData)
+        // if (statu === 200) {
+        //   this.seller = jsonData
+        // }
         if (res.status === 200) {
           // console.log(res.data.data)
           this.seller = res.data.data
@@ -54,7 +65,7 @@
     line-height: 40px
     display: flex
     justify-content: space-between
-    border-1px(rgba(7,17,27,0.1))
+    border-1px(rgba(7, 17, 27, 0.1))
     .tab-item
       flex: 1
       text-align: center
