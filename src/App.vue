@@ -32,7 +32,7 @@
     created() {
       this.axios.get('/api/seller').then((res) => {
         // console.log(res)
-        console.log('merge')
+        console.log('111')
         let {
           status: statu,
           data: {
