@@ -32,7 +32,7 @@
     created() {
       this.axios.get('/api/seller').then((res) => {
         // console.log(res)
-        console.log(5)
+        console.log(8)
         let {
           status: statu,
           data: {
