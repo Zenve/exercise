@@ -32,21 +32,21 @@
     created() {
       this.axios.get('/api/seller').then((res) => {
         // console.log(res)
-        // let {
-        //   status: statu,
-        //   data: {
-        //     data: jsonData
-        //   }
-        // } = res
+        let {
+          status: statu,
+          data: {
+            data: jsonData
+          }
+        } = res
         // console.log(statu)
         // console.log(jsonData)
-        // if (statu === 200) {
-        //   this.seller = jsonData
-        // }
-        if (res.status === 200) {
-          // console.log(res.data.data)
-          this.seller = res.data.data
+        if (statu === 200) {
+          this.seller = jsonData
         }
+        // if (res.status === 200) {
+        //   // console.log(res.data.data)
+        //   this.seller = res.data.data
+        // }
       })
     },
     components: {
@@ -69,5 +69,4 @@
     .tab-item
       flex: 1
       text-align: center
-
 </style>
