@@ -7,6 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'common/stylus/index.styl'
 
+export var comtem = new Vue()
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 

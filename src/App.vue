@@ -29,9 +29,17 @@
         seller: {}
       }
     },
+    // beforeCreate() {
+    //   console.log('beforeCreate')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
     created() {
+      // console.log('created')
+      // console.log(this.data)
+      // console.log(this.$el)
       this.axios.get('/api/seller').then((res) => {
-        console.log(res)
+        // console.log(res)
         let {
           status: statu,
           data: {
@@ -49,6 +57,37 @@
         // }
       })
     },
+    // beforeMount() {
+    //   console.log('beforeMount')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+    // mounted() {
+    //   console.log('mounted')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+    // beforeUpdate() {
+    //   console.log('beforeUpdate')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+    // updated() {
+    //   console.log('updated')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+    // beforeDestroy() {
+    //   console.log('beforeDestroy')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+    // destroyed() {
+    //   console.log('destroyed')
+    //   console.log(this.data)
+    //   console.log(this.$el)
+    // },
+
     components: {
       'iheader': header,
       'goods': goods,
@@ -66,6 +105,7 @@
     display: flex
     justify-content: space-between
     border-1px(rgba(7, 17, 27, 0.1))
+
     .tab-item
       flex: 1
       text-align: center

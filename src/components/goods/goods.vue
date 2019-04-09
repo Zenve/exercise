@@ -31,7 +31,8 @@
                   <span v-show="food.oldPrice" class="old">￥{{food.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
-                  <cartcontrol :food="food" v-on:cartAdd="cartAdds($event)"></cartcontrol>
+                  <cartcontrol :food="food"></cartcontrol>
+                  <!--<cartcontrol :food="food" v-on:cartAdd="cartAdds($event)"></cartcontrol>-->
                 </div>
               </div>
             </li>
@@ -40,7 +41,7 @@
       </ul>
     </div>
     <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice"
-              :min-price="seller.minPrice" ref="shopcart"></shopcart>
+              :min-price="seller.minPrice" ref="shopCart"></shopcart>
   </div>
 </template>
 
@@ -49,6 +50,7 @@
   import BScroll from 'better-scroll'
   import shopcart from '@/components/shopcart/shopcart'
   import cartcontrol from '@/components/cartcontrol/cartcontrol'
+  import {comtem} from '../../main'
 
   const ERR_OK = 200
   export default {
@@ -67,6 +69,10 @@
       }
     },
     created() {
+      comtem.$on('ball', (args) => {
+        // console.log(args)
+        this._drop(args)
+      })
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
       this.axios.get('/api/goods').then((res) => {
         // console.log(res.data.data)
@@ -82,11 +88,11 @@
     },
     methods: {
       cartAdds(args) {
-        console.log(args)
-        // this._drop(args)
+        // console.log(args)
+        this._drop(args)
       },
       _drop(args) {
-        this.$refs.shopcart.drop(args)
+        this.$refs.shopCart.drop(args)
       },
       selectMenu(index) {
         console.log(index)
@@ -156,60 +162,72 @@
     width: 100%
     display: flex
     overflow: hidden
+
     .menu-wrapper
       width: 80px
       flex: 0 0 80px
       background: #f3f5f7
+
       .memu-item
         width: 56px
         height: 54px
         display: table
         line-height 14px
         padding: 0 12px
+
         &.current
           position: relative
           margin-top: -1px
           background: #fff
           font-weight: 700
+
         .icon
           display: inline-block
           vertical-align: top
           width: 12px
           height: 12px
           margin-right: 2px
+
           &.decrease
             bg-image(decrease_3)
             -webkit-background-size: 12px 12px
             background-size: 12px 12px
             background-repeat: no-repeat
+
           &.discount
             bg-image(discount_3)
             -webkit-background-size: 12px 12px
             background-size: 12px 12px
             background-repeat: no-repeat
+
           &.guarantee
             bg-image(guarantee_3)
             -webkit-background-size: 12px 12px
             background-size: 12px 12px
             background-repeat: no-repeat
+
           &.invoice
             bg-image(invoice_3)
             -webkit-background-size: 12px 12px
             background-size: 12px 12px
             background-repeat: no-repeat
+
           &.special
             bg-image(special_3)
             -webkit-background-size: 12px 12px
             background-size: 12px 12px
             background-repeat: no-repeat
+
         .text
           display: table-cell
           vertical-align: middle
           width: 56px
           font-size: 12px
           border-1px(rgba(7, 17, 27, 0.1))
+
     .foods-wrapper
       flex: 1
+
       .title
         padding-left: 14px
         height: 26px
@@ -217,31 +235,39 @@
         border-left: 2px solid #d9dde1
         color: rgb(147, 153, 159)
         background: #f3f5f7
+
       .food-item
         display: flex
         padding: 18px
         /*padding-bottom: 18px*/
         border-1px(rgba(7, 17, 27, 0.1))
+
         &:last-child
           border-none()
           margin-bottom: 0
+
         .icon
           font-size: 0
+
         .content
           padding-left: 10px
+
           .name
             padding-top: 2px
             font-size: 14px
             color: rgb(7, 17, 27)
             line-height: 14px
+
           .desc
           .extra
             font-size: 10px
             color: rgb(147, 153, 159)
             line-height: 10px
             padding-top: 8px
+
             .count
               margin-right: 8px
+
           .price
             padding-top：8px
             .new
@@ -249,11 +275,13 @@
               font-size: 14px
               line-height: 24px
               color: rgb(240, 20, 20)
+
             .old
               font-weight: 700
               font-size: 10px
               color: rgb(147, 153, 159)
               line-height: 24px
+
           .cartcontrol-wrapper
             position: absolute
             bottom: 10px
