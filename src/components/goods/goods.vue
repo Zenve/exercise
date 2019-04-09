@@ -87,12 +87,11 @@
       })
     },
     methods: {
-      cartAdds(args) {
-        // console.log(args)
-        this._drop(args)
-      },
       _drop(args) {
-        this.$refs.shopCart.drop(args)
+        // 体验优化，异步执行下落动画
+        this.$nextTick(() => {
+          this.$refs.shopCart.drop(args)
+        })
       },
       selectMenu(index) {
         console.log(index)
