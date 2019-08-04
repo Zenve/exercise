@@ -1,6 +1,29 @@
 <template>
   <div class="app">
     <iheader :seller="seller"></iheader>
+    <!--<div class="tab">-->
+    <!--<router-link class="tab-item" :to="{path:'goods',query:{id:'goods'}}">-->
+    <!--商品-->
+    <!--</router-link>-->
+    <!--<router-link class="tab-item" :to="{path:'ratings',query:{id:'ratings'}}">-->
+    <!--评论-->
+    <!--</router-link>-->
+    <!--<router-link class="tab-item" :to="{path:'seller',query:{id:'seller'}}">-->
+    <!--商家-->
+    <!--</router-link>-->
+    <!--</div>-->
+    <!--<div class="tab">-->
+    <!--<router-link class="tab-item" :to="{name:'goods',params:{id:'goods'}}">-->
+    <!--商品-->
+    <!--</router-link>-->
+    <!--<router-link class="tab-item" :to="{name:'ratings',params:{id:'ratings'}}">-->
+    <!--评论-->
+    <!--</router-link>-->
+    <!--<router-link class="tab-item" :to="{name:'seller',params:{id:'seller'}}">-->
+    <!--商家-->
+    <!--</router-link>-->
+    <!--</div>-->
+    <!--<router-view :seller="seller"></router-view>-->
     <div class="tab">
       <router-link class="tab-item" to="goods">
         商品
@@ -38,8 +61,10 @@
       // console.log('created')
       // console.log(this.data)
       // console.log(this.$el)
+      console.log('测试')
       this.axios.get('/api/seller').then((res) => {
         // console.log(res)
+        console.log('测试')
         let {
           status: statu,
           data: {
